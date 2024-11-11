@@ -1,0 +1,70 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilidad y Estadística UPC 2024</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700" rel="stylesheet">
+</head>
+<body>
+    <div id="mainBody">
+        <div id="contentsBody">
+            <div id="main-title">Probabilidad y Estadísitca - UPC 2024</div>
+            <div id="main-subtitle" class="mainText">Estudio sobre el uso de las Redes Sociales</div>
+            <div class="mainText auxTextCentered">Selecciona tu género</div>
+            <div id="select-block-main" class="mainText">
+                <div id="selected-male" style="border-radius: 10px 0 0 10px;">Hombre</div>
+                <div id="selected-female">Mujer</div>
+                <div id="selected-other"style="border-radius: 0 10px 10px 0;">Otro</div>
+            </div>
+            <div id="start-button-div"><div id="start-button" class="mainText">Siguiente</div></div>
+        </div>
+    </div>
+    <script>
+        var selectedSelect = undefined;
+
+        var selectDict = {
+            male: document.getElementById("selected-male"),
+            female: document.getElementById("selected-female"),
+            other: document.getElementById("selected-other"),
+        };
+
+        function unmarkSelected(sel) {
+            sel.style.fontWeight = "normal";
+            sel.style.background = "#ddf3ff";
+        }
+
+        function markSelected(sel) {
+            sel.style.fontWeight = "bold";
+            sel.style.background = "#7cbcde";
+        }
+
+        selectDict.male.addEventListener("click", function() {
+            if (selectedSelect !== undefined) {
+                unmarkSelected(selectedSelect);
+            }
+            markSelected(selectDict.male);
+            selectedSelect = selectDict.male;
+        })
+
+        selectDict.female.addEventListener("click", function() {
+            if (selectedSelect !== undefined) {
+                unmarkSelected(selectedSelect);
+            }
+            markSelected(selectDict.female);
+            selectedSelect = selectDict.female;
+        })
+
+        selectDict.other.addEventListener("click", function() {
+            if (selectedSelect !== undefined) {
+                unmarkSelected(selectedSelect);
+            }
+            markSelected(selectDict.other);
+            selectedSelect = selectDict.other;
+        })
+
+    </script>
+</body>
+</html>

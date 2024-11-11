@@ -32,7 +32,6 @@ body{
 }
 
 #main-subtitle{
-    font-size: 1.5rem;
     text-align: center;
     font-style: italic;
     margin-top: 10px;
@@ -65,7 +64,6 @@ body{
     border-radius: 10px;
     color: white;
     padding: 10px;
-    font-size: 1.5rem;
     cursor: pointer;
     transition: background .3s, padding .3s;
 }
@@ -81,17 +79,56 @@ body{
     justify-content: center;
 }
 
+#select-block-main{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 15px;
+}
+
+#select-block-main div{
+    display: flex;
+    height: 100%;
+    padding: 20px 10px;
+    cursor: pointer;
+    background: #ddf3ff;
+    transition: background 0.5s, font-weight 0.5s;
+}
+
+#select-block-main div:hover{
+    background: #7cbcde !important;
+}
+
+.mainText{
+    font-size: 1.5rem;
+}
+
+.auxTextCentered{
+    text-align: center;
+    margin: 20px;
+    font-weight: 600;
+}
+
+.textBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.stretchTextBox{
+    width: 90%;
+}
+
+
 @media (max-width: 675px) {
     #main-title {
         font-size: 1.5rem;
     }
-    #main-subtitle{
+    .mainText{
         font-size: 1.2rem;
     }
     #div-inpus input {
-        font-size: 1.2rem;
-    }
-    #start-button{
         font-size: 1.2rem;
     }
 }
@@ -99,7 +136,7 @@ body{
     #main-title {
         font-size: 1.4rem;
     }
-    #main-subtitle{
+    .mainText{
         font-size: 1.1rem;
     }
 }
@@ -107,13 +144,10 @@ body{
     #main-title {
         font-size: 1.3rem;
     }
-    #main-subtitle{
+    .mainText{
         font-size: 1rem;
     }
     #div-inpus input {
-        font-size: 1rem;
-    }
-    #start-button{
         font-size: 1rem;
     }
 }
@@ -121,7 +155,7 @@ body{
     #main-title {
         font-size: 1.2rem;
     }
-    #main-subtitle{
+    .mainText{
         font-size: 0.9rem;
     }
 }
@@ -129,7 +163,7 @@ body{
     #main-title {
         font-size: 1.1rem;
     }
-    #main-subtitle{
+    .mainText{
         font-size: 0.8rem;
     }
 }
@@ -137,13 +171,10 @@ body{
     #main-title {
         font-size: 1rem;
     }
-    #main-subtitle{
+    .mainText{
         font-size: 0.7rem;
     }
     #div-inpus input {
-        font-size: 0.8rem;
-    }
-    #start-button{
         font-size: 0.8rem;
     }
 }

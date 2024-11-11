@@ -20,9 +20,9 @@ def home():
     return render_template('index.html')
 
 @app.route('/edad')
-def home():
+def edad():
     return render_template('page1.html')
 
 @app.route('/genero')
-def home():
+def genero():
     return render_template('page2.html')

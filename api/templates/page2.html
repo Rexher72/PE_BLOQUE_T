@@ -95,9 +95,10 @@
         })
 
         function sendTimeData(){
+            var data = new FormData();
+            data.append("time", `${performance.now()-iniTime}`);
             const url = "/register-time";
-            const datos = JSON.stringify({ time: `${performance.now()-iniTime}`, gender: genderVal});
-            navigator.sendBeacon(url, datos);
+            navigator.sendBeacon(url, data);
         }
 
     </script>

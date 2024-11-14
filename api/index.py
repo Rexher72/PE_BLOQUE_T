@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, redirect
 from flask_mysql_connector import MySQL
 import os
 
@@ -44,7 +44,7 @@ def registerTime():
             _gender = request.form.get("gender")
             _age = request.form.get("age")
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times(time, gender, age) VALUES (%s, %s, %s)", (_time, _gender, _age))
+            cur.execute("INSERT INTO times (time, gender, age) VALUES (%s, %s, %s)", (_time, _gender, _age))
             mysql.connection.commit()
             session["done"] = True
             return "OK", 200
@@ -53,6 +53,8 @@ def registerTime():
 def final():
     if session.get("done") is not None:
         return render_template("message.html");
+    else:
+        return redirect("/")
         
 @app.route("/clear-session")
 def clear_session():

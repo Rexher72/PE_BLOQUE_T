@@ -55,7 +55,9 @@ def clear_session():
 
 @app.route("/test-sql")
 def testsql():
+    _time = 1
+    _gender = "Male"
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM times")
-    dat = cur.fetchall()
+    cur.execute("INSERT INTO times VALUES (%s, %s)", (_time, _gender))
+    mysql.connection.commit()
     return "Hi"

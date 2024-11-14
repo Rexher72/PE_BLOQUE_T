@@ -17,14 +17,14 @@ mysql = MySQL(app)
 
 @app.route('/')
 def home():
-    if not session["done"]:
+    if session.get("done") is None:
         return render_template('index.html')
     else:
         return render_template('message.html')
 
 @app.route('/edad') 
 def age():
-    if not session["done"]:
+    if session.get("done") is None:
         return render_template('page1.html')
     else:
         return render_template('message.html')
@@ -32,7 +32,7 @@ def age():
 @app.route('/genero', methods=['POST'])
 def gender():
     if request.method == 'POST':
-        if not session["done"]:
+        if session.get("done") is None:
             session["age"] = request.form.get("age")
             return render_template('page2.html')
         else:
@@ -41,7 +41,7 @@ def gender():
 @app.route('/register-time', methods=['POST'])
 def registerTime():
     if request.method == 'POST':
-        if not session["done"]:
+        if session.get("done") is None:
             _time = request.form.get("time")
             _gender = request.form.get("gender")
             _age = session["age"]

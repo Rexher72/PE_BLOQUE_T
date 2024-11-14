@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, request
 from flask_mysql_connector import MySQL
 import os
 
@@ -20,9 +20,21 @@ def home():
     return render_template('index.html')
 
 @app.route('/edad')
-def edad():
+def home():
+    session["age"] = request.args.get("age")
     return render_template('page1.html')
 
 @app.route('/genero')
-def genero():
+def home():
     return render_template('page2.html')
+
+@app.route('/register-time', methods=['POST'])
+def registerTime():
+    session["done"] = True
+    data = request.get_json()
+    session["gender"] = data.gender
+    session["time"] = data.time
+    print(session["time"])
+    print(session["age"])
+    print(session["gender"])
+    return "OK"

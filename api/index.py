@@ -52,3 +52,11 @@ def registerTime():
 def clear_session():
     session.clear()
     return "Cleared!"
+
+@app.route("/test-sql")
+def clear_session():
+    session.clear()
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM times")
+    dat = cur.fetchall()
+    return dat

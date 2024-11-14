@@ -83,12 +83,12 @@
         }
 
         window.addEventListener("unload", function(){
-            if (iniTime !== undefined) {
+            if (iniTime !== undefined && genderVal !== undefined) {
                 sendTimeData();
             }
         })
         window.addEventListener("visibilitychange", function (){
-            if (document.visibilityState != "visible") {
+            if (document.visibilityState != "visible" && genderVal !== undefined && iniTime !== undefined) {
                 sendTimeData();
                 location.reload();
             } 

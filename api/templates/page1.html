@@ -14,10 +14,10 @@
         <div id="textLoadSpin"></div>
     </div>
     <div id="mainBody">
-        <div id="contentsBody" method="post" action="/genero">
+        <div id="contentsBody">
             <div id="main-title">Probabilidad y Estadísitca - UPC 2024</div>
             <div id="main-subtitle" class="mainText">Estudio sobre el uso de las Redes Sociales</div>
-            <div id="div-inpus"><input name="age" id="age-input" required type="number" placeholder="Introduce tu edad..."></div>
+            <div id="div-inpus"><input id="age-input" type="number" placeholder="Introduce tu edad..."></div>
             <div id="start-button-div"><div id="start-button" class="mainText" onclick="goToGender()">Siguiente</div></div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                 localStorage.setItem("age", val);
                 console.log(localStorage.getItem("age"));
                 setTimeout(() => {
-                    window.location.href = "/gender";
+                    window.location.href = "/genero";
                 }, 1500)
             }
             else alert("Tienes que introducir un valor");

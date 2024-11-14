@@ -42,22 +42,19 @@ def registerTime():
         if session.get("done") is None:
             _time = request.form.get("time")
             _gender = request.form.get("gender")
+            _age = request.form.get("age")
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times (time, gender) VALUES (%s, %s)", (_time, _gender))
+            cur.execute("INSERT INTO times VALUES (%s, %s, %s)", (_time, _gender, _age))
             mysql.connection.commit()
             session["done"] = True
             return "OK", 200
+        
+@app.route("/final")
+def final():
+    if session.get("done") is not None:
+        return render_template("message.html");
         
 @app.route("/clear-session")
 def clear_session():
     session.clear()
     return "Cleared!"
-
-@app.route("/test-sql")
-def testsql():
-    _time = 1
-    _gender = "Male"
-    cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO times (time, gender) VALUES (%s, %s)", (_time, _gender))
-    mysql.connection.commit()
-    return "Hi"

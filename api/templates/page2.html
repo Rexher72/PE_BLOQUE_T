@@ -88,7 +88,7 @@
         function visibilityFunc(){
             if (document.visibilityState != "visible" && genderVal !== undefined && iniTime !== undefined) {
                 sendTimeData();
-                location.reload();
+                window.location.href = "/final"; 
             } 
         }
 

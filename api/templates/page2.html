@@ -104,13 +104,14 @@
             var data = new FormData();
             data.append("time", `${performance.now()-iniTime}`);
             data.append("gender", genderVal);
+            data.append(localStorage.getItem("age"))
             const url = "/register-time";
             localStorage.setItem("done", "true");
             navigator.sendBeacon(url, data);
         }
 
         if (localStorage.getItem("done") == "true") {
-            window.location.href = "/"; 
+            window.location.href = "/final"; 
         }
 
     </script>

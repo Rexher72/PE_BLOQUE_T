@@ -32,5 +32,4 @@ def gender():
 @app.route('/register-time', methods=['POST'])
 def registerTime():
     data = request.form.get("time")
-    print(data)
-    return "OK"
+    return data

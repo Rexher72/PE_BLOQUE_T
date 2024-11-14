@@ -20,12 +20,12 @@ def home():
     return render_template('index.html')
 
 @app.route('/edad')
-def home():
+def age():
     session["age"] = request.args.get("age")
     return render_template('page1.html')
 
 @app.route('/genero')
-def home():
+def gender():
     return render_template('page2.html')
 
 @app.route('/register-time', methods=['POST'])

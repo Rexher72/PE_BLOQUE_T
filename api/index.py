@@ -51,10 +51,7 @@ def registerTime():
         
 @app.route("/final")
 def final():
-    if session.get("done") is not None:
-        return render_template("message.html");
-    else:
-        return redirect("/")
+    return render_template("message.html");
         
 @app.route("/clear-session")
 def clear_session():

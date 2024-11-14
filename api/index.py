@@ -46,7 +46,7 @@ def registerTime():
             cur.execute("INSERT INTO times (time, gender) VALUES (%s, %s)", (_time, _gender))
             mysql.connection.commit()
             session["done"] = True
-            return "OK"
+            return "OK", 200
         
 @app.route("/clear-session")
 def clear_session():

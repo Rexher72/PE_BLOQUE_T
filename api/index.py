@@ -20,9 +20,10 @@ mysql = MySQL(app)
 def home():
     return render_template('index.html')
 
-@app.route('/edad')
+@app.route('/edad') 
 def age():
     session["age"] = request.args.get("age")
+    print("Edad")
     print(session["age"])
     return render_template('page1.html')
 

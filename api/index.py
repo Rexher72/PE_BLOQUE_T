@@ -43,7 +43,7 @@ def registerTime():
             _time = request.form.get("time")
             _gender = request.form.get("gender")
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times VALUES (%s, %s)", (_time, _gender))
+            cur.execute("INSERT INTO times (time, gender) VALUES (%s, %s)", (_time, _gender))
             mysql.connection.commit()
             session["done"] = True
             return "OK"
@@ -58,6 +58,6 @@ def testsql():
     _time = 1
     _gender = "Male"
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO times VALUES (%s, %s)", (_time, _gender))
+    cur.execute("INSERT INTO times (time, gender) VALUES (%s, %s)", (_time, _gender))
     mysql.connection.commit()
     return "Hi"

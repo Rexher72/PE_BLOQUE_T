@@ -1,7 +1,6 @@
 from flask import Flask, render_template, session, request
 from flask_mysql_connector import MySQL
 import os
-import json
 
 app = Flask(__name__)
 
@@ -22,24 +21,18 @@ def home():
 
 @app.route('/edad') 
 def age():
-    session["age"] = request.args.get("age")
-    print("Edad")
     print(session["age"])
     return render_template('page1.html')
 
 @app.route('/genero')
 def gender():
+    session["age"] = request.args.get("age")
+    print(session["age"])
     return render_template('page2.html')
 
 @app.route('/register-time', methods=['POST'])
 def registerTime():
-    raw_data = request.data.decode('utf-8')
-    data = json.loads(raw_data)
-    session["done"] = True
     data = request.get_json()
-    session["gender"] = data.get("gender")
-    session["time"] = data.get("time")
-    print(session["time"])
-    print(session["age"])
-    print(session["gender"])
+    print(data)
+    print(request)
     return "OK"

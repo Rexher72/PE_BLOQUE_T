@@ -82,25 +82,30 @@
             }
         }
 
-        window.addEventListener("unload", function(){
-            if (iniTime !== undefined && genderVal !== undefined) {
-                sendTimeData();
-            }
-        })
-        window.addEventListener("visibilitychange", function (){
+        window.addEventListener("unload", unloadFunc);
+        window.addEventListener("visibilitychange", visibilityFunc);
+
+        function visibilityFunc(){
             if (document.visibilityState != "visible" && genderVal !== undefined && iniTime !== undefined) {
                 sendTimeData();
                 location.reload();
             } 
-        })
+        }
+
+        function unloadFunc(){
+            if (iniTime !== undefined && genderVal !== undefined) {
+                sendTimeData();
+            }
+        }
 
         function sendTimeData(){
+            window.removeEventListener("unload", unloadFunc);
+            window.removeEventListener("visibilitychange", visibilityFunc);
             var data = new FormData();
             data.append("time", `${performance.now()-iniTime}`);
             data.append("gender", genderVal);
             const url = "/register-time";
             navigator.sendBeacon(url, data);
-            location.h
         }
 
     </script>

@@ -17,19 +17,36 @@ mysql = MySQL(app)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    if not session["done"]:
+        return render_template('index.html')
+    else:
+        return render_template('message.html')
 
 @app.route('/edad') 
 def age():
-    return render_template('page1.html')
+    if not session["done"]:
+        return render_template('page1.html')
+    else:
+        return render_template('message.html')
 
-@app.route('/genero')
+@app.route('/genero', methods=['POST'])
 def gender():
-    session["age"] = request.args.get("age")
-    print(session["age"])
-    return render_template('page2.html')
+    if request.method == 'POST':
+        if not session["done"]:
+            session["age"] = request.form.get("age")
+            return render_template('page2.html')
+        else:
+            return render_template('message.html')
 
 @app.route('/register-time', methods=['POST'])
 def registerTime():
-    data = request.form.get("time")
-    return data
+    if request.method == 'POST':
+        if not session["done"]:
+            _time = request.form.get("time")
+            _gender = request.form.get("gender")
+            _age = session["age"]
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO times VALUES (%s, %s)", (_time, _gender, _age))
+            mysql.connection.commit()
+            session["done"] = True
+            return "OK"

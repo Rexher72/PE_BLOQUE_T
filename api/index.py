@@ -54,8 +54,7 @@ def clear_session():
     return "Cleared!"
 
 @app.route("/test-sql")
-def clear_session():
-    session.clear()
+def testsql():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM times")
     dat = cur.fetchall()

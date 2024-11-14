@@ -44,7 +44,7 @@ def registerTime():
             _gender = request.form.get("gender")
             _age = request.form.get("age")
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times VALUES (%s, %s, %s)", (_time, _gender, _age))
+            cur.execute("INSERT INTO times(time, gender, age) VALUES (%s, %s, %s)", (_time, _gender, _age))
             mysql.connection.commit()
             session["done"] = True
             return "OK", 200

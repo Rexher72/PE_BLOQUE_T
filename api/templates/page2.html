@@ -96,9 +96,8 @@
 
         function sendTimeData(){
             var data = new FormData();
-            data.append("time", `${performance.now()-iniTime}`);
-            const url = "/register-time";
-            navigator.sendBeacon(url, data);
+            data.append("time", "5000");
+            navigator.sendBeacon("/register-time", data);
         }
 
     </script>

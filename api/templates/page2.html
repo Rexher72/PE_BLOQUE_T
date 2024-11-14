@@ -105,7 +105,12 @@
             data.append("time", `${performance.now()-iniTime}`);
             data.append("gender", genderVal);
             const url = "/register-time";
+            localStorage.setItem("done", "true");
             navigator.sendBeacon(url, data);
+        }
+
+        if (localStorage.getItem("done") == "true") {
+            window.location.href = "/"; 
         }
 
     </script>

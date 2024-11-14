@@ -29,14 +29,12 @@ def age():
     else:
         return render_template('message.html')
 
-@app.route('/genero', methods=['POST'])
+@app.route('/genero')
 def gender():
-    if request.method == 'POST':
-        if session.get("done") is None:
-            session["age"] = request.form.get("age")
-            return render_template('page2.html')
-        else:
-            return render_template('message.html')
+    if session.get("done") is None:
+        return render_template('page2.html')
+    else:
+        return render_template('message.html')
 
 @app.route('/register-time', methods=['POST'])
 def registerTime():
@@ -44,9 +42,8 @@ def registerTime():
         if session.get("done") is None:
             _time = request.form.get("time")
             _gender = request.form.get("gender")
-            _age = session["age"]
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times VALUES (%s, %s, %s)", (_time, _gender, _age))
+            cur.execute("INSERT INTO times VALUES (%s, %s)", (_time, _gender))
             mysql.connection.commit()
             session["done"] = True
             return "OK"

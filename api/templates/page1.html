@@ -24,10 +24,16 @@
     <script>
         var loaderDiv = document.getElementById("spinnerDivAll");
         function goToGender() {
-            loaderDiv.style.display = "flex";
-            setTimeout(() => {
-                window.location.href = "/genero";
-            }, 1500)
+            let val = document.getElementById("age-input").value;
+            if (val != "") {
+                loaderDiv.style.display = "flex";
+                localStorage.setItem("age", val);
+                console.log(localStorage.getItem("age"));
+                setTimeout(() => {
+                    window.location.href = "/gender";
+                }, 1500)
+            }
+            else alert("Tienes que introducir un valor");
         }
     </script>
 </body>

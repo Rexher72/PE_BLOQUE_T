@@ -3,12 +3,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Probabilidad y Estadística UPC 2024</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/style.css', v=1.1)}}">
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/style.css', v=1.2)}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700" rel="stylesheet">
 </head>
 <body>
+    <div id="spinnerDivAll" style="display:none;">
+        <div class="loader"></div>
+        <div id="textLoadSpin"></div>
+    </div>
     <div id="mainBody">
         <div id="contentsBody">
             <div id="main-title">Probabilidad y Estadísitca - UPC 2024</div>
@@ -19,11 +23,11 @@
                 <div id="selected-female">Mujer</div>
                 <div id="selected-other"style="border-radius: 0 10px 10px 0;">Otro</div>
             </div>
-            <div id="start-button-div"><a id="start-button" class="mainText" href="https://sites.uft.edu.br/plataformaevento/media/eventos/palestrante/thumbnail/3695.jpg">Siguiente</a></div>
+            <div id="start-button-div"><div id="start-button" class="mainText" onclick="sendGender()">Siguiente</div></div>
         </div>
     </div>
     <script>
-        var selectedSelect = undefined;
+        var selectedSelect;
 
         var selectDict = {
             male: document.getElementById("selected-male"),
@@ -64,6 +68,37 @@
             markSelected(selectDict.other);
             selectedSelect = selectDict.other;
         })
+
+        var loaderDiv = document.getElementById("spinnerDivAll");
+        var genderVal;
+        var iniTime;
+
+        function sendGender(){
+            if (selectedSelect == undefined) alert("Tienes que introducir un valor");
+            else {
+                genderVal = selectedSelect.textContent;
+                loaderDiv.style.display = "flex";
+                iniTime = performance.now();
+            }
+        }
+
+        window.addEventListener("unload", function(){
+            if (iniTime !== undefined) {
+                sendTimeData();
+            }
+        })
+        window.addEventListener("visibilitychange", function (){
+            if (document.visibilityState != "visible") {
+                sendTimeData();
+                location.reload();
+            } 
+        })
+
+        function sendTimeData(){
+            const url = "/register-time";
+            const datos = JSON.stringify({ time: `${performance.now()-iniTime}`, gender: genderVal});
+            navigator.sendBeacon(url, datos);
+        }
 
     </script>
 </body>

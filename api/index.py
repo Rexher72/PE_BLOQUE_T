@@ -25,12 +25,12 @@ def age():
 
 @app.route('/genero')
 def gender():
-    print(request.args)
+    session["age"] = request.args.get("age")
+    print(session["age"])
     return render_template('page2.html')
 
 @app.route('/register-time', methods=['POST'])
 def registerTime():
-    data = request.get_json()
+    data = request.form.get("time")
     print(data)
-    print(request)
     return "OK"

@@ -32,8 +32,8 @@ def gender():
 def registerTime():
     session["done"] = True
     data = request.get_json()
-    session["gender"] = data.gender
-    session["time"] = data.time
+    session["gender"] = data.get("gender")
+    session["time"] = data.get("time")
     print(session["time"])
     print(session["age"])
     print(session["gender"])

@@ -50,3 +50,8 @@ def registerTime():
             mysql.connection.commit()
             session["done"] = True
             return "OK"
+        
+@app.route("/clear-session")
+def clear_session():
+    session.clear()
+    return "Cleared!"

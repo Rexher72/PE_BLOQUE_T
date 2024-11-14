@@ -40,8 +40,10 @@ def gender():
 
 @app.route('/register-time', methods=['POST'])
 def registerTime():
+    print(request.method)
     if request.method == 'POST':
         if session.get("done") is None:
+            print("Entered")
             _time = request.form.get("time")
             _gender = request.form.get("gender")
             _age = session["age"]
@@ -50,7 +52,7 @@ def registerTime():
             mysql.connection.commit()
             session["done"] = True
             return "OK"
-        
+            
 @app.route("/clear-session")
 def clear_session():
     session.clear()

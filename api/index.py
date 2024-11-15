@@ -15,6 +15,10 @@ app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))
 
 mysql = MySQL(app)
 
+@app.before_request
+def setup():
+    session.permanent = True
+
 @app.route('/')
 def home():
     if session.get("done") is None:

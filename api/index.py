@@ -40,11 +40,18 @@ def gender():
 def registerTime():
     if request.method == 'POST':
         if session.get("done") is None:
-            _time = request.form.get("time")
+            _time = round(int(request.form.get("time"))/1000, 3)
             _gender = request.form.get("gender")
             _age = request.form.get("age")
+            charGender = "X"
+            if _gender == "Hombre":
+                charGender = "H"
+            elif _gender == "Mujer":
+                charGender = "M"
+            elif _gender == "Otro":
+                charGender = "O"
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times (time, gender, age, moment) VALUES (%s, %s, %s, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR))", (_time, _gender, _age))
+            cur.execute("INSERT INTO times (time, gender, age, moment) VALUES (%s, %s, %s, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR))", (_time, charGender, _age))
             mysql.connection.commit()
             session["done"] = True
             return "OK", 200

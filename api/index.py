@@ -44,7 +44,7 @@ def gender():
 def registerTime():
     if request.method == 'POST':
         if session.get("done") is None:
-            _time = round(int(request.form.get("time"))/1000, 3)
+            _time = round(float(request.form.get("time"))/1000, 3)
             _gender = request.form.get("gender")
             _age = request.form.get("age")
             charGender = "X"

@@ -1,0 +1,107 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilidad y Estadística UPC 2024</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/style.css', v=1.3)}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700" rel="stylesheet">
+</head>
+<body>
+    <div id="spinnerDivAll" style="display:none;">
+        <div class="loader"></div>
+        <div id="textLoadSpin"></div>
+    </div>
+    <div id="mainBody">
+        <div id="contentsBody">
+            <div id="main-title">Probabilidad y Estadísitca - UPC 2024</div>
+            <div id="main-subtitle" class="mainText">Estudio sobre el uso de las Redes Sociales</div>
+            <div class="mainText auxTextCentered">¿De cuales de las siguientes redes sociales has oido hablar?</div>
+            <div id="select-block-main" class="mainText">
+                <div class="selectQ" data-selected="false" style="border-radius: 10px 0 0 10px;">Mastodon</div>
+                <div class="selectQ" data-selected="false">Kick</div>
+                <div class="selectQ" data-selected="false">Geopolis</div>
+                <div class="selectQ" data-selected="false">Ello</div>
+                <div class="selectQ" data-selected="false" style="border-radius: 0 10px 10px 0;">Ninguna</div>
+            </div>
+            <div id="start-button-div"><div id="start-button" class="mainText" onclick="send()">Siguiente</div></div>
+        </div>
+    </div>
+    <script>
+        var selectQ = document.getElementsByClassName("selectQ");
+        
+        for (let i = 0; i < selectQ.length; i++) {
+            let e = selectQ[i];
+            e.addEventListener("click", function(){
+                if (e.dataset.selected == "false") {
+                    markSelected(e);
+                    e.dataset.selected = "true";
+                }
+                else {
+                    unmarkSelected(e);
+                    e.dataset.selected = "false";
+                }
+            })
+        }
+
+        function unmarkSelected(sel) {
+            sel.style.fontWeight = "normal";
+            sel.style.background = "#ddf3ff";
+        }
+
+        function markSelected(sel) {
+            sel.style.fontWeight = "bold";
+            sel.style.background = "#7cbcde";
+        }
+
+        var loaderDiv = document.getElementById("spinnerDivAll");
+        var genderVal;
+        var iniTime;
+
+        function send(){
+            loaderDiv.style.display = "flex";
+            iniTime = performance.now();
+            setTimeout(function(){
+                sendTimeData(2);
+            }, 60000*5);
+        }
+
+        window.addEventListener("unload", unloadFunc);
+        window.addEventListener("visibilitychange", visibilityFunc);
+
+        function visibilityFunc(){
+            if (document.visibilityState != "visible" && genderVal !== undefined && iniTime !== undefined) {
+                sendTimeData(0);
+                window.location.href = "/final"; 
+            } 
+        }
+
+        function unloadFunc(){
+            if (iniTime !== undefined && genderVal !== undefined) {
+                sendTimeData(1);
+            }
+        }
+
+        function sendTimeData(event){ // 0 -> cambio de ventana
+                                    //  1-> cierre o recarga de ventana
+                                    // 2-> limite de tiempo superado
+            window.removeEventListener("unload", unloadFunc);
+            window.removeEventListener("visibilitychange", visibilityFunc);
+            var data = new FormData();
+            data.append("time", `${performance.now()-iniTime}`);
+            data.append("gender", localStorage.getItem("gender"));
+            data.append("event", event);
+            data.append("age", localStorage.getItem("age"))
+            const url = "/register-time";
+            localStorage.setItem("done", "true");
+            navigator.sendBeacon(url, data);
+        }
+
+        if (localStorage.getItem("done") == "true") {
+            window.location.href = "/final"; 
+        }
+
+    </script>
+</body>
+</html>

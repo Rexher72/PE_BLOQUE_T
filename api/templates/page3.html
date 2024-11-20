@@ -71,14 +71,14 @@
         window.addEventListener("visibilitychange", visibilityFunc);
 
         function visibilityFunc(){
-            if (document.visibilityState != "visible" && genderVal !== undefined && iniTime !== undefined) {
+            if (document.visibilityState != "visible" && iniTime !== undefined) {
                 sendTimeData(0);
                 window.location.href = "/final"; 
             } 
         }
 
         function unloadFunc(){
-            if (iniTime !== undefined && genderVal !== undefined) {
+            if (iniTime !== undefined) {
                 sendTimeData(1);
             }
         }

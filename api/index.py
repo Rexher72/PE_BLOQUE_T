@@ -53,7 +53,6 @@ def registerTime():
         if session.get("done") is None:
             _time = round(int(request.form.get("time"))/1000, 3)
             _gender = request.form.get("gender")
-            _event = request.form.get("event")
             _age = request.form.get("age")
             charGender = "X"
             if _gender == "Hombre":
@@ -63,7 +62,7 @@ def registerTime():
             elif _gender == "Otro":
                 charGender = "O"
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO times (time, gender, age, moment, event) VALUES (%s, %s, %s, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR), %s)", (_time, charGender, _age, _event))
+            cur.execute("INSERT INTO times (time, gender, age, moment) VALUES (%s, %s, %s, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR))", (_time, charGender, _age))
             mysql.connection.commit()
             session["done"] = True
             return "OK", 200

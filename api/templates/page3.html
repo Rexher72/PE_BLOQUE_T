@@ -63,7 +63,7 @@
             loaderDiv.style.display = "flex";
             iniTime = performance.now();
             setTimeout(function(){
-                sendTimeData(2);
+                sendTimeData();
             }, 60000*5);
         }
 
@@ -72,26 +72,23 @@
 
         function visibilityFunc(){
             if (document.visibilityState != "visible" && iniTime !== undefined) {
-                sendTimeData(0);
+                sendTimeData();
                 window.location.href = "/final"; 
             } 
         }
 
         function unloadFunc(){
             if (iniTime !== undefined) {
-                sendTimeData(1);
+                sendTimeData();
             }
         }
 
-        function sendTimeData(event){ // 0 -> cambio de ventana
-                                    //  1-> cierre o recarga de ventana
-                                    // 2-> limite de tiempo superado
+        function sendTimeData(){
             window.removeEventListener("unload", unloadFunc);
             window.removeEventListener("visibilitychange", visibilityFunc);
             var data = new FormData();
             data.append("time", `${performance.now()-iniTime}`);
             data.append("gender", localStorage.getItem("gender"));
-            data.append("event", event);
             data.append("age", localStorage.getItem("age"))
             const url = "/register-time";
             localStorage.setItem("done", "true");

@@ -81,7 +81,7 @@
             var data = new FormData();
             data.append("time", `${performance.now()-iniTime}`);
             data.append("gender", localStorage.getItem("gender"));
-            data.append("age", localStorage.getItem("age"))
+            data.append("age", localStorage.getItem("age"));
             const url = "/register-time";
             localStorage.setItem("done", "true");
             navigator.sendBeacon(url, data);

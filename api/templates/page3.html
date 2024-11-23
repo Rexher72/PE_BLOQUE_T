@@ -67,7 +67,6 @@
             }, 60000*5);
         }
 
-        window.addEventListener("unload", unloadFunc);
         window.addEventListener("visibilitychange", visibilityFunc);
 
         function visibilityFunc(){
@@ -77,14 +76,7 @@
             } 
         }
 
-        function unloadFunc(){
-            if (iniTime !== undefined) {
-                sendTimeData();
-            }
-        }
-
         function sendTimeData(){
-            window.removeEventListener("unload", unloadFunc);
             window.removeEventListener("visibilitychange", visibilityFunc);
             var data = new FormData();
             data.append("time", `${performance.now()-iniTime}`);

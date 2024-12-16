@@ -7,13 +7,13 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
 # DB config.
-app.config["MYSQL_HOST"] = os.getenv('MYSQL_HOST')
+"""app.config["MYSQL_HOST"] = os.getenv('MYSQL_HOST')
 app.config["MYSQL_USER"] = os.getenv('MYSQL_USER')
 app.config["MYSQL_PASSWORD"] = os.getenv('MYSQL_PASSWORD')
 app.config["MYSQL_DATABASE"] = os.getenv('MYSQL_DB')
-app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))
+app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))"""
 
-mysql = MySQL(app)
+# mysql = MySQL(app)
 
 @app.before_request
 def setup():
@@ -61,9 +61,9 @@ def registerTime():
                 charGender = "M"
             elif _gender == "Otro":
                 charGender = "O"
-            cur = mysql.connection.cursor()
+            """cur = mysql.connection.cursor()
             cur.execute("INSERT INTO times (time, gender, age, moment) VALUES (%s, %s, %s, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR))", (_time, charGender, _age))
-            mysql.connection.commit()
+            mysql.connection.commit()"""
             session["done"] = True
             return "OK", 200
         
